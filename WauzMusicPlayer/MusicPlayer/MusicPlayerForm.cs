@@ -8,7 +8,6 @@ namespace WauzMusicPlayer
 {
     public partial class MusicPlayerForm : Form, Themable
     {
-
         private string[] validAudioFormats = {".mp3", ".wav", ".flac", ".m4a", ".wma", ".wzst"};
 
         public string configPath = Application.StartupPath + "\\Preferences\\";
@@ -211,7 +210,7 @@ namespace WauzMusicPlayer
             AboutTextBox.SelectionColor = ThemeManager.highlightFontColor;
             AboutTextBox.SelectionFont = new Font(AboutTextBox.Font.FontFamily, 13, AboutTextBox.Font.Style | FontStyle.Bold);
 
-            AboutTextBox.AppendText("\u00a9 Copyright Wauzmons 2018 - 2019   http://www.wauz.eu\n\n");
+            AboutTextBox.AppendText("\u00a9 Copyright Seven Ducks Studios 2018 - 2019   https://www.seven-ducks.com\n\n");
             AboutTextBox.AppendText("Supported Audio-Formats (Win10):\n" + String.Join(" ", validAudioFormats) + "\n\n\n");
 
             textBoxIndex = AboutSelectionUpdate(textBoxIndex);
@@ -220,7 +219,10 @@ namespace WauzMusicPlayer
             AboutTextBox.SelectionColor = ThemeManager.highlightFontColor;
             AboutTextBox.SelectionFont = new Font(AboutTextBox.Font.FontFamily, 11, AboutTextBox.Font.Style | FontStyle.Bold);
             AboutTextBox.AppendText("+ Usability Changes (Doubleclick in tree to play etc.)\n");
-            AboutTextBox.AppendText("+ Audio Recorder\n\n");
+            AboutTextBox.AppendText("+ Audio Recorder\n");
+            AboutTextBox.AppendText("+ Custom Album Art Uploads\n");
+            AboutTextBox.AppendText("+ Custom Theme Mascot Uploads\n");
+            AboutTextBox.AppendText("+ Themes: Pure White & Deep Black\n\n");
 
             textBoxIndex = AboutSelectionUpdate(textBoxIndex);
             AboutTextBox.AppendText("vAlpha 0.6.0\n");
@@ -303,6 +305,5 @@ namespace WauzMusicPlayer
         {
             Close();
         }
-
     }
 }

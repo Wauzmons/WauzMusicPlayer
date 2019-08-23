@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Drawing;
+using System.IO;
+using TagLib;
 
 namespace WauzMusicPlayer
 {
@@ -13,6 +15,7 @@ namespace WauzMusicPlayer
         public string Year { get; }
         public string Length { get; }
         public string WzID { get; }
+        public Image Art { get; }
 
         public SongTag(string filePath)
         {
@@ -31,9 +34,16 @@ namespace WauzMusicPlayer
             Artist = tagFile.Tag.FirstPerformer;
             Year = tagFile.Tag.Year.ToString();
             Length = tagFile.Properties.Duration.ToString(@"h\:mm\:ss");
+
+            IPicture picture = tagFile.Tag.Pictures.Length == 0 ? null : tagFile.Tag.Pictures[0];
+            if(picture != null)
+            {
+                byte[] imageBytes = (byte[]) picture.Data.Data;
+                Art = Image.FromStream(new MemoryStream(imageBytes));
+            }
         }
 
-        public void Update(string Title, uint? Track, string Album, string Artist, uint? Year)
+        public void Update(string Title, uint? Track, string Album, string Artist, uint? Year, Image Art)
         {
             if (tagFile == null)
                 return;
@@ -48,39 +58,50 @@ namespace WauzMusicPlayer
                 tagFile.Tag.Performers = new string[] { Artist };
             if(Year != null)
                 tagFile.Tag.Year = Year.GetValueOrDefault();
+            if (Art != null)
+                tagFile.Tag.Pictures = new IPicture[] { new Picture(new ByteVector(ImageToByteArray(Art))) };
 
             tagFile.Save();
         }
 
-        public static string Serialize(string filePath, bool createIfNotExists)
+        public static byte[] ImageToByteArray(Image image)
         {
-            try
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                TagLib.File tagFile = TagLib.File.Create(filePath);
-
-                string uuid = tagFile.Tag.Comment;
-
-                if (string.IsNullOrWhiteSpace(uuid) || !uuid.StartsWith("wzID_"))
-                {
-                    if (createIfNotExists)
-                    {
-                        uuid = "wzID_" + Guid.NewGuid() + Guid.NewGuid();
-                        tagFile.Tag.Comment = uuid;
-                        tagFile.Save();
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-
-                return uuid;
-            }
-            catch
-            {
-                return "";
+                image.Save(memoryStream, image.RawFormat);
+                return memoryStream.ToArray();
             }
         }
+
+        //public static string Serialize(string filePath, bool createIfNotExists)
+        //{
+        //    try
+        //    {
+        //        TagLib.File tagFile = TagLib.File.Create(filePath);
+
+        //        string uuid = tagFile.Tag.Comment;
+
+        //        if (string.IsNullOrWhiteSpace(uuid) || !uuid.StartsWith("wzID_"))
+        //        {
+        //            if (createIfNotExists)
+        //            {
+        //                uuid = "wzID_" + Guid.NewGuid() + Guid.NewGuid();
+        //                tagFile.Tag.Comment = uuid;
+        //                tagFile.Save();
+        //            }
+        //            else
+        //            {
+        //                return "";
+        //            }
+        //        }
+
+        //        return uuid;
+        //    }
+        //    catch
+        //    {
+        //        return "";
+        //    }
+        //}
 
     }
 }

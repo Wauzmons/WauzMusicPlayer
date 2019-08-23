@@ -50,8 +50,19 @@
             this.button6 = new System.Windows.Forms.Button();
             this.MascotSelection = new System.Windows.Forms.ComboBox();
             this.SaveAndUseButton = new System.Windows.Forms.Button();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.ColorDialog = new System.Windows.Forms.ColorDialog();
+            this.PreviewPanel = new System.Windows.Forms.Panel();
+            this.PreviewMascotBox = new System.Windows.Forms.PictureBox();
+            this.PreviewSubPanel = new System.Windows.Forms.Panel();
+            this.PreviewLabel3 = new System.Windows.Forms.Label();
+            this.PreviewLabel2 = new System.Windows.Forms.Label();
+            this.PreviewLabel1 = new System.Windows.Forms.Label();
+            this.PreviewLabel = new System.Windows.Forms.Label();
+            this.UploadCustomMascotDialog = new System.Windows.Forms.OpenFileDialog();
             this.TableLayoutPanel.SuspendLayout();
+            this.PreviewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviewMascotBox)).BeginInit();
+            this.PreviewSubPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -311,6 +322,7 @@
             this.MascotSelection.Name = "MascotSelection";
             this.MascotSelection.Size = new System.Drawing.Size(175, 21);
             this.MascotSelection.TabIndex = 20;
+            this.MascotSelection.SelectedIndexChanged += new System.EventHandler(this.MascotSelection_SelectedIndexChanged);
             // 
             // SaveAndUseButton
             // 
@@ -325,6 +337,85 @@
             this.SaveAndUseButton.UseVisualStyleBackColor = false;
             this.SaveAndUseButton.Click += new System.EventHandler(this.SaveAndUseButton_Click);
             // 
+            // PreviewPanel
+            // 
+            this.PreviewPanel.Controls.Add(this.PreviewMascotBox);
+            this.PreviewPanel.Controls.Add(this.PreviewSubPanel);
+            this.PreviewPanel.Location = new System.Drawing.Point(345, 33);
+            this.PreviewPanel.Name = "PreviewPanel";
+            this.PreviewPanel.Size = new System.Drawing.Size(150, 200);
+            this.PreviewPanel.TabIndex = 9;
+            // 
+            // PreviewMascotBox
+            // 
+            this.PreviewMascotBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewMascotBox.Image = global::WauzMusicPlayer.Properties.Resources.penguin;
+            this.PreviewMascotBox.Location = new System.Drawing.Point(10, 10);
+            this.PreviewMascotBox.Margin = new System.Windows.Forms.Padding(10);
+            this.PreviewMascotBox.Name = "PreviewMascotBox";
+            this.PreviewMascotBox.Size = new System.Drawing.Size(130, 83);
+            this.PreviewMascotBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviewMascotBox.TabIndex = 14;
+            this.PreviewMascotBox.TabStop = false;
+            // 
+            // PreviewSubPanel
+            // 
+            this.PreviewSubPanel.Controls.Add(this.PreviewLabel3);
+            this.PreviewSubPanel.Controls.Add(this.PreviewLabel2);
+            this.PreviewSubPanel.Controls.Add(this.PreviewLabel1);
+            this.PreviewSubPanel.Location = new System.Drawing.Point(10, 103);
+            this.PreviewSubPanel.Margin = new System.Windows.Forms.Padding(10);
+            this.PreviewSubPanel.Name = "PreviewSubPanel";
+            this.PreviewSubPanel.Size = new System.Drawing.Size(130, 87);
+            this.PreviewSubPanel.TabIndex = 0;
+            // 
+            // PreviewLabel3
+            // 
+            this.PreviewLabel3.Location = new System.Drawing.Point(5, 63);
+            this.PreviewLabel3.Margin = new System.Windows.Forms.Padding(5);
+            this.PreviewLabel3.Name = "PreviewLabel3";
+            this.PreviewLabel3.Padding = new System.Windows.Forms.Padding(3);
+            this.PreviewLabel3.Size = new System.Drawing.Size(120, 19);
+            this.PreviewLabel3.TabIndex = 2;
+            this.PreviewLabel3.Text = "Normal Text";
+            // 
+            // PreviewLabel2
+            // 
+            this.PreviewLabel2.Location = new System.Drawing.Point(5, 34);
+            this.PreviewLabel2.Margin = new System.Windows.Forms.Padding(5);
+            this.PreviewLabel2.Name = "PreviewLabel2";
+            this.PreviewLabel2.Padding = new System.Windows.Forms.Padding(3);
+            this.PreviewLabel2.Size = new System.Drawing.Size(120, 19);
+            this.PreviewLabel2.TabIndex = 1;
+            this.PreviewLabel2.Text = "Normal Text";
+            // 
+            // PreviewLabel1
+            // 
+            this.PreviewLabel1.Location = new System.Drawing.Point(5, 5);
+            this.PreviewLabel1.Margin = new System.Windows.Forms.Padding(5);
+            this.PreviewLabel1.Name = "PreviewLabel1";
+            this.PreviewLabel1.Padding = new System.Windows.Forms.Padding(3);
+            this.PreviewLabel1.Size = new System.Drawing.Size(120, 19);
+            this.PreviewLabel1.TabIndex = 0;
+            this.PreviewLabel1.Text = "Highlighted Text";
+            // 
+            // PreviewLabel
+            // 
+            this.PreviewLabel.AutoSize = true;
+            this.PreviewLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PreviewLabel.ForeColor = System.Drawing.Color.Orange;
+            this.PreviewLabel.Location = new System.Drawing.Point(341, 9);
+            this.PreviewLabel.Name = "PreviewLabel";
+            this.PreviewLabel.Size = new System.Drawing.Size(71, 21);
+            this.PreviewLabel.TabIndex = 10;
+            this.PreviewLabel.Text = "Preview";
+            this.PreviewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // UploadCustomMascotDialog
+            // 
+            this.UploadCustomMascotDialog.FileName = "openFileDialog1";
+            // 
             // NewThemeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,7 +423,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(477, 315);
+            this.ClientSize = new System.Drawing.Size(554, 315);
+            this.Controls.Add(this.PreviewLabel);
+            this.Controls.Add(this.PreviewPanel);
             this.Controls.Add(this.SaveAndUseButton);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SaveButton);
@@ -346,6 +439,9 @@
             this.Text = "WauzMusicPlayer New Theme";
             this.TableLayoutPanel.ResumeLayout(false);
             this.TableLayoutPanel.PerformLayout();
+            this.PreviewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PreviewMascotBox)).EndInit();
+            this.PreviewSubPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,7 +461,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.ColorDialog ColorDialog;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
@@ -374,5 +470,13 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ComboBox MascotSelection;
+        private System.Windows.Forms.Panel PreviewPanel;
+        private System.Windows.Forms.Label PreviewLabel;
+        private System.Windows.Forms.Panel PreviewSubPanel;
+        private System.Windows.Forms.Label PreviewLabel3;
+        private System.Windows.Forms.Label PreviewLabel2;
+        private System.Windows.Forms.Label PreviewLabel1;
+        private System.Windows.Forms.PictureBox PreviewMascotBox;
+        private System.Windows.Forms.OpenFileDialog UploadCustomMascotDialog;
     }
 }

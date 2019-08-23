@@ -252,24 +252,24 @@ namespace WauzMusicPlayer
                 Process.Start(directoryInfo.FullName);
         }
 
-        private void ShowInWindowsExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowMusicFolderInWindowsExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (new DirectoryInfo(musicFolderPath).Exists)
                 Process.Start(musicFolderPath);
         }
 
-        private void ShowInWindowsExplorerToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ShowPlaylistFolderInWindowsExplorerToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (new DirectoryInfo(playlistPath).Exists)
                 Process.Start(playlistPath);
         }
 
-        private void ShowInWindowsExplorerToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void ShowConfigFolderInWindowsExplorerToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (new DirectoryInfo(configPath).Exists)
                 Process.Start(configPath);
         }
-        private void ShowInWindowsExplorerToolStripMenuItem3_Click(object sender, EventArgs e)
+        private void ShowThemeFolderInWindowsExplorerToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             if (new DirectoryInfo(themePath).Exists)
                 Process.Start(themePath);
@@ -392,6 +392,16 @@ namespace WauzMusicPlayer
         private void StardustCrusadersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeTheme("stardustCrusaders");
+        }
+
+        private void PureWhiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("pureWhite");
+        }
+
+        private void DeepBlackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("deepBlack");
         }
 
         public void ChangeTheme(string themeName)

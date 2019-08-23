@@ -43,7 +43,11 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.NameLabel = new System.Windows.Forms.Label();
+            this.AlbumBox = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.UploadAlbumArtDialog = new System.Windows.Forms.OpenFileDialog();
             this.TableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumBox)).BeginInit();
             this.SuspendLayout();
             // 
             // TableLayoutPanel
@@ -222,6 +226,34 @@
             this.NameLabel.Text = "This is the name of the Song.mp3";
             this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // AlbumBox
+            // 
+            this.AlbumBox.Image = global::WauzMusicPlayer.Properties.Resources.album_art;
+            this.AlbumBox.Location = new System.Drawing.Point(284, 33);
+            this.AlbumBox.Name = "AlbumBox";
+            this.AlbumBox.Padding = new System.Windows.Forms.Padding(51, 11, 51, 11);
+            this.AlbumBox.Size = new System.Drawing.Size(180, 100);
+            this.AlbumBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AlbumBox.TabIndex = 8;
+            this.AlbumBox.TabStop = false;
+            this.AlbumBox.Click += new System.EventHandler(this.AlbumBox_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Orange;
+            this.label6.Location = new System.Drawing.Point(284, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(180, 15);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Click the Album Art to change it!";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // UploadAlbumArtDialog
+            // 
+            this.UploadAlbumArtDialog.FileName = "openFileDialog1";
+            // 
             // ConfigTagsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,7 +261,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(322, 205);
+            this.ClientSize = new System.Drawing.Size(490, 205);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.AlbumBox);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CloseButton);
@@ -242,6 +276,7 @@
             this.Text = "WauzMusicPlayer Tags";
             this.TableLayoutPanel.ResumeLayout(false);
             this.TableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AlbumBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +297,8 @@
         private System.Windows.Forms.TextBox AlbumTextBox;
         private System.Windows.Forms.TextBox TrackTextBox;
         private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.PictureBox AlbumBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.OpenFileDialog UploadAlbumArtDialog;
     }
 }

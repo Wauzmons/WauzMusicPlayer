@@ -250,6 +250,8 @@ namespace WauzMusicPlayer
                 ResetMarqueePosition();
             }
 
+            AlbumBox.Image = Properties.Resources.album_art;
+
             MainPlayerTrackBar.Maximum = 0;
             MainPlayerTrackBar.Value = 0;
         }

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Wauzmons")]
 [assembly: AssemblyProduct("WauzMusicPlayer")]
-[assembly: AssemblyCopyright("© Copyright Wauzmons 2018 - 2019")]
+[assembly: AssemblyCopyright("© Copyright Seven Ducks Studios 2018 - 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.7.0")]
-[assembly: AssemblyFileVersion("0.7.0")]
+[assembly: AssemblyVersion("0.7.2")]
+[assembly: AssemblyFileVersion("0.7.2")]

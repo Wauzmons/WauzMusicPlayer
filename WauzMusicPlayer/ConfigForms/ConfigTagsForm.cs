@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -7,12 +8,11 @@ namespace WauzMusicPlayer
 {
     public partial class ConfigTagsForm : Form, Themable
     {
+        private MusicPlayerForm MusicPlayer { get; }
 
-        MusicPlayerForm musicPlayer;
+        private FileInfo FileInfo { get; }
 
-        FileInfo fileInfo;
-
-        SongTag songTag;
+        private SongTag SongTag { get; }
 
         public ConfigTagsForm(MusicPlayerForm musicPlayer, FileInfo fileInfo)
         {
@@ -21,23 +21,25 @@ namespace WauzMusicPlayer
             ThemeManager.AddThemableForm(this);
             ApplyTheme();
 
-            this.musicPlayer = musicPlayer;
-            this.fileInfo = fileInfo;
+            this.MusicPlayer = musicPlayer;
+            this.FileInfo = fileInfo;
 
             NameLabel.Text = fileInfo.Name;
 
-            songTag = new SongTag(fileInfo.FullName);
-            TitleTextBox.Text = songTag.Title;
-            TrackTextBox.Text = songTag.Track;
-            AlbumTextBox.Text = songTag.Album;
-            ArtistTextBox.Text = songTag.Artist;
-            YearTextBox.Text = songTag.Year;
+            SongTag = new SongTag(fileInfo.FullName);
+            TitleTextBox.Text = SongTag.Title;
+            TrackTextBox.Text = SongTag.Track;
+            AlbumTextBox.Text = SongTag.Album;
+            ArtistTextBox.Text = SongTag.Artist;
+            YearTextBox.Text = SongTag.Year;
+            AlbumBox.Image = SongTag.Art ?? Properties.Resources.album_art;
         }
 
         public void ApplyTheme()
         {
             BackColor = ThemeManager.mainBackColorVariant1;
             TableLayoutPanel.BackColor = ThemeManager.mainBackColorVariant2;
+            AlbumBox.BackColor = ThemeManager.mainBackColorVariant2;
 
             NameLabel.ForeColor = ThemeManager.highlightFontColor;
             label1.ForeColor = ThemeManager.highlightFontColor;
@@ -45,6 +47,7 @@ namespace WauzMusicPlayer
             label3.ForeColor = ThemeManager.highlightFontColor;
             label4.ForeColor = ThemeManager.highlightFontColor;
             label5.ForeColor = ThemeManager.highlightFontColor;
+            label6.ForeColor = ThemeManager.highlightFontColor;
         }
 
         private void TrackTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -55,6 +58,15 @@ namespace WauzMusicPlayer
         private void YearTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+        }
+
+        private void AlbumBox_Click(object sender, EventArgs e)
+        {
+            UploadAlbumArtDialog.Filter = "Image Files(*.BMP; *.JPG; *.PNG; *.GIF)| *.BMP; *.JPG; *.PNG; *.GIF";
+            if (UploadAlbumArtDialog.ShowDialog() == DialogResult.OK)
+            {
+                AlbumBox.Image = Image.FromFile(UploadAlbumArtDialog.FileName);
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -87,10 +99,10 @@ namespace WauzMusicPlayer
                 if (!string.IsNullOrWhiteSpace(YearTextBox.Text) && int.Parse(YearTextBox.Text) >= 0)
                     Year = uint.Parse(YearTextBox.Text);
 
-                songTag.Update(Title, Track, Album, Artist, Year);
+                SongTag.Update(Title, Track, Album, Artist, Year, AlbumBox.Image);
 
                 Invoke(new Action<string, string>(ShowMessage), "Tag Info:", 
-                    "The tags of \"" + fileInfo.Name + "\" have successfully been updated! " +
+                    "The tags of \"" + FileInfo.Name + "\" have successfully been updated! " +
                     "You may need to restart the player, to see the changes in all of your playlists.");
 
                 Invoke(new Action(Close));
@@ -99,7 +111,7 @@ namespace WauzMusicPlayer
             {
                 Invoke(new Action<bool>(SetEnabled), true);
                 Invoke(new Action<string, string>(ShowMessage), "Tag Error:",
-                    "Updating of tags for \"" + fileInfo.Name + "\" has failed!");
+                    "Updating of tags for \"" + FileInfo.Name + "\" has failed!");
             }
         }
 
@@ -111,11 +123,10 @@ namespace WauzMusicPlayer
 
         private void ShowMessage(string title, string message)
         {
-            if (musicPlayer.showSystemTrayInfo)
-                musicPlayer.SystemTray.ShowBalloonTip(1000, title, message, new ToolTipIcon());
+            if (MusicPlayer.showSystemTrayInfo)
+                MusicPlayer.SystemTray.ShowBalloonTip(1000, title, message, new ToolTipIcon());
             else
                 MessageBox.Show(message);
         }
-
     }
 }

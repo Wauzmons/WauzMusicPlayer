@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
@@ -9,6 +11,8 @@ namespace WauzMusicPlayer
     {
 
         public static Image image;
+
+        public static string imageString;
 
         public static Color mainBackColorVariant1;
 
@@ -29,6 +33,8 @@ namespace WauzMusicPlayer
         public static void SetTheme(MusicPlayerForm musicPlayer, string themeName)
         {
             musicPlayer.penguinPurpleToolStripMenuItem.Checked = false;
+            musicPlayer.pureWhiteToolStripMenuItem.Checked = false;
+            musicPlayer.deepBlackToolStripMenuItem.Checked = false;
             musicPlayer.feelsGoodManToolStripMenuItem.Checked = false;
             musicPlayer.forTheHordeToolStripMenuItem.Checked = false;
             musicPlayer.stardustCrusadersToolStripMenuItem.Checked = false;
@@ -39,6 +45,16 @@ namespace WauzMusicPlayer
             {
                 string themeProperties = musicPlayer.ReadConfig(themeFile.FullName);
                 SetThemeCustom(themeProperties.Split(';'));
+            }
+            else if (themeName.Equals("pureWhite"))
+            {
+                SetThemePureWhite();
+                musicPlayer.pureWhiteToolStripMenuItem.Checked = true;
+            }
+            else if (themeName.Equals("deepBlack"))
+            {
+                SetThemeDeepBlack();
+                musicPlayer.deepBlackToolStripMenuItem.Checked = true;
             }
             else if (themeName.Equals("feelsGoodMan"))
             {
@@ -106,7 +122,11 @@ namespace WauzMusicPlayer
 
         private static void SetThemeCustom(string[] themeProperties)
         {
-            image = GetMascotMap()[themeProperties[6]];
+            imageString = themeProperties[6];
+            if(imageString.StartsWith("Custom:"))
+                image = ImageFromBase64String(imageString.Replace("Custom:", ""));
+            else
+                image = GetMascotMap()[imageString];
             mainBackColorVariant1 = ColorTranslator.FromHtml(themeProperties[0]);
             mainBackColorVariant2 = ColorTranslator.FromHtml(themeProperties[1]);
             accentBackColor = ColorTranslator.FromHtml(themeProperties[2]);
@@ -118,6 +138,7 @@ namespace WauzMusicPlayer
         private static void SetThemePenguinPurple()
         {
             image = Properties.Resources.penguin;
+            imageString = "Penguin";
             mainBackColorVariant1 = ColorTranslator.FromHtml("#323232");
             mainBackColorVariant2 = ColorTranslator.FromHtml("#4b4b4b");
             accentBackColor = ColorTranslator.FromHtml("#321932");
@@ -126,9 +147,34 @@ namespace WauzMusicPlayer
             highlightFontColor = ColorTranslator.FromHtml("#FFA500");
         }
 
+        private static void SetThemePureWhite()
+        {
+            image = Properties.Resources.penguin;
+            imageString = "Penguin";
+            mainBackColorVariant1 = ColorTranslator.FromHtml("#DDDDDD");
+            mainBackColorVariant2 = ColorTranslator.FromHtml("#BBBBBB");
+            accentBackColor = ColorTranslator.FromHtml("#FFFFFF");
+            highlightBackColor = ColorTranslator.FromHtml("#000000");
+            mainFontColor = ColorTranslator.FromHtml("#000000");
+            highlightFontColor = ColorTranslator.FromHtml("#4488FF");
+        }
+
+        private static void SetThemeDeepBlack()
+        {
+            image = Properties.Resources.penguin;
+            imageString = "Penguin";
+            mainBackColorVariant1 = ColorTranslator.FromHtml("#000000");
+            mainBackColorVariant2 = ColorTranslator.FromHtml("#111111");
+            accentBackColor = ColorTranslator.FromHtml("#060606");
+            highlightBackColor = ColorTranslator.FromHtml("#110000");
+            mainFontColor = ColorTranslator.FromHtml("#666666");
+            highlightFontColor = ColorTranslator.FromHtml("#FF3333");
+        }
+
         private static void SetThemeFeelsGoodMan()
         {
             image = Properties.Resources.pepe;
+            imageString = "Pepe the Frog";
             mainBackColorVariant1 = ColorTranslator.FromHtml("#F0E0D6");
             mainBackColorVariant2 = ColorTranslator.FromHtml("#FFFFEE");
             accentBackColor = ColorTranslator.FromHtml("#FFFFEE");
@@ -140,6 +186,7 @@ namespace WauzMusicPlayer
         private static void SetThemeForTheHorde()
         {
             image = Properties.Resources.garrosh;
+            imageString = "Garrosh Hellscream";
             mainBackColorVariant1 = ColorTranslator.FromHtml("#000000");
             mainBackColorVariant2 = ColorTranslator.FromHtml("#28150b");
             accentBackColor = ColorTranslator.FromHtml("#7d0d0d");
@@ -151,6 +198,7 @@ namespace WauzMusicPlayer
         private static void SetThemeStardustCrusaders()
         {
             image = Properties.Resources.star_platinum;
+            imageString = "Star Platinum";
             mainBackColorVariant1 = ColorTranslator.FromHtml("#001015");
             mainBackColorVariant2 = ColorTranslator.FromHtml("#000050");
             accentBackColor = ColorTranslator.FromHtml("#927ddd");
@@ -159,5 +207,17 @@ namespace WauzMusicPlayer
             highlightFontColor = ColorTranslator.FromHtml("#ffcc00");
         }
 
+        public static string ImageToBase64String(Image image)
+        {
+            using (MemoryStream memory = new MemoryStream()) {
+                image.Save(memory, ImageFormat.Gif);
+                return Convert.ToBase64String(memory.ToArray());
+            }
+        }
+
+        public static Image ImageFromBase64String(string base64)
+        {
+            return Image.FromStream(new MemoryStream(Convert.FromBase64String(base64)));
+        }
     }
 }
