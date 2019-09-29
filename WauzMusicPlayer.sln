@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29215.179
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WauzMusicPlayer", "WauzMusicPlayer\WauzMusicPlayer.csproj", "{F6E9047D-5C66-4299-AB9D-F03F5C3E4114}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WauzMusicPlayerInstaller", "WauzMusicPlayerInstaller\WauzMusicPlayerInstaller.vdproj", "{F5DA0E99-978E-418B-889E-D3A26697C4EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{F6E9047D-5C66-4299-AB9D-F03F5C3E4114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6E9047D-5C66-4299-AB9D-F03F5C3E4114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6E9047D-5C66-4299-AB9D-F03F5C3E4114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DA0E99-978E-418B-889E-D3A26697C4EF}.Debug|Any CPU.ActiveCfg = Debug
+		{F5DA0E99-978E-418B-889E-D3A26697C4EF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
